@@ -12,7 +12,7 @@ def create_app():
     if not database_url:
         raise ValueError("DATABASE_URL is not set!")
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'database_url'
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     
     db.init_app(app)
     CORS(app)
