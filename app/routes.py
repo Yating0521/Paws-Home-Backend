@@ -5,11 +5,13 @@ from models import  db, Volunteer, Schedule, Event, Message, LogHours, User, Mes
 from flask_cors import CORS
 import os
 
-app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:202025085@localhost/paws_home_vms'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-db.init_app(app)
-CORS(app)
+# app = Flask(__name__)
+# # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:202025085@localhost/paws_home_vms'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+# db.init_app(app)
+# CORS(app)
+from app import create_app
+app = create_app()
 
 
 # API Endpoints

@@ -1,8 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Enum
 import enum
+from app import db
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
 
 # Models
 
