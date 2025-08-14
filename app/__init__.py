@@ -8,9 +8,9 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     
-    database_url = os.getenv("DATABASE_PUBLIC_URL")
+    database_url = os.getenv("DATABASE_URL")
     if not database_url:
-        raise ValueError("DATABASE_PUBLIC_URL is not set!")
+        raise ValueError("DATABASE_URL is not set!")
 
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     db.init_app(app)
