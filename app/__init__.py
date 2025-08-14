@@ -14,10 +14,12 @@ def create_app():
 
     # app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    database_url = os.getenv("DATABASE_PUBLIC_URL") or os.getenv("DATABASE_URL")
 
-    if app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgresql://'):
-        app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace('postgresql://', 'postgresql+psycopg2://', 1)
+    if not database_url:
+        raise ValueError("DATABASE_PUBLIC_URL or DATABASE_URL is not set!")
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     
     db.init_app(app)
     CORS(app)
