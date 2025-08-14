@@ -3,9 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from models import  db, Volunteer, Schedule, Event, Message, LogHours, User, MessageRecipient, EventSignup
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:202025085@localhost/paws_home_vms'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:202025085@localhost/paws_home_vms'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 db.init_app(app)
 CORS(app)
 
@@ -351,7 +353,9 @@ def get_log_hours():
 
 
 if __name__ == '__main__':
-    # with app.app_context():
+    with app.app_context():
     #     db.drop_all()
-    #     db.create_all()
-    app.run(debug=True)
+        db.create_all()
+
+    # app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
